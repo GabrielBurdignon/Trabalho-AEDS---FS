@@ -1,0 +1,57 @@
+/************************************************************************************
+* NAME :            test_colisao
+*
+* DESCRIPTION :     Realiza testes para verificar o funcionamento correto da função colisao.
+*
+* INPUTS :
+*       None
+*
+* OUTPUTS :
+*       None
+*
+* PROCESS :
+*       [1] Cria um objeto Passaro e um objeto Obstaculo.
+*       [2] Testa se o passaro está acima da tela. Espera-se que a função colisao retorne 1.
+*       [3] Testa se o passaro está abaixo da tela. Espera-se que a função colisao retorne 1.
+*       [4] Testa se o passaro está sem colisão com o obstaculo. Espera-se que a função colisao retorne 0.
+*       [5] Testa se o passaro colide com a parte superior do obstaculo. Espera-se que a função colisao retorne 1.
+*       [6] Testa se o passaro colide com a parte inferior do obstaculo. Espera-se que a função colisao retorne 1.
+*       [7] Exibe a mensagem "Todos os testes passaram!".
+*
+* NOTES :
+*       Esta função assume que já existe a função colisao implementada corretamente.
+*       A função assert() é usada para verificar se os resultados esperados são retornados pela função colisao.
+*/
+void test_colisao()
+{
+    Passaro passaro;
+    Obstaculo obstaculo;
+
+    // Teste: passaro acima da tela
+    passaro.y = -10;
+    assert(colisao(passaro, obstaculo) == 1);
+
+    // Teste: passaro abaixo da tela
+    passaro.y = 600;
+    assert(colisao(passaro, obstaculo) == 1);
+
+    // Teste: passaro sem colisao
+    passaro.y = 300;
+    obstaculo.x = 400;
+    obstaculo.y = 200;
+    assert(colisao(passaro, obstaculo) == 0);
+
+    // Teste: passaro colide com a parte superior do obstaculo
+    passaro.y = 200;
+    obstaculo.x = 400;
+    obstaculo.y = 150;
+    assert(colisao(passaro, obstaculo) == 1);
+
+    // Teste: passaro colide com a parte inferior do obstaculo
+    passaro.y = 250;
+    obstaculo.x = 400;
+    obstaculo.y = 300;
+    assert(colisao(passaro, obstaculo) == 1);
+
+    cout << "Todos os testes passaram!" << endl;
+}

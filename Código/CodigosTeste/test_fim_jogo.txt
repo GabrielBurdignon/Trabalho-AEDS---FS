@@ -1,0 +1,58 @@
+/************************************************************************************
+* NAME :            test_fim_jogo
+*
+* DESCRIPTION :     Realiza testes para verificar o funcionamento correto da função fim_jogo.
+*
+* INPUTS :
+*       None
+*
+* OUTPUTS :
+*       None
+*
+* PROCESS :
+*       [1] Configuração inicial do Allegro.
+*       [2] Inicialização dos addons necessários (primitives, font e ttf).
+*       [3] Carrega a fonte "arial.ttf" para uso nos testes.
+*       [4] Verifica se a fonte foi carregada corretamente. Caso contrário, exibe uma mensagem de erro.
+*       [5] Teste: pontuação igual a 0.
+*       [6] Teste: pontuação positiva.
+*       [7] Teste: pontuação negativa.
+*       [8] Finalizações do Allegro.
+*       [9] Liberação da memória alocada para a fonte.
+*       [10] Desligamento dos addons do Allegro.
+*       [11] Exibe a mensagem "Todos os testes passaram!".
+*
+* NOTES :
+*       Esta função assume que o Allegro já está configurado corretamente.
+*       A função fim_jogo() será testada com diferentes valores de pontuação.
+*       A função assert() é usada para verificar se a fonte foi carregada corretamente.
+*/
+void test_fim_jogo()
+{
+    // Configuração inicial do Allegro
+    al_init();
+    al_init_primitives_addon();
+    al_init_font_addon();
+    al_init_ttf_addon();
+
+    // Carrega a fonte para uso nos testes
+    fonte = al_load_ttf_font("arial.ttf", 24, 0);
+    assert(fonte != nullptr && "Erro ao carregar a fonte!");
+
+    // Teste: pontuação igual a 0
+    fim_jogo(0);
+
+    // Teste: pontuação positiva
+    fim_jogo(100);
+
+    // Teste: pontuação negativa
+    fim_jogo(-50);
+
+    // Finalizações do Allegro
+    al_destroy_font(fonte);
+    al_shutdown_font_addon();
+    al_shutdown_ttf_addon();
+    al_shutdown_primitives_addon();
+
+    cout << "Todos os testes passaram!" << endl;
+}
